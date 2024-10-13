@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Info App</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Information Extractor</h1>
+    <form method="post">
+        <label for="folder">Folder Path:</label>
+        <input type="text" id="folder" name="folder" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if image_infos %}
+    <h2>Image Information</h2>
+    <table>
+        <tr>
+            <th>Filename</th>
+            <th>Size (Pixels)</th>
+            <th>DPI</th>
+            <th>Color Depth</th>
+            <th>Compression</th>
+            <th>Quantization Matrix</th>
+            <th>Palette Size</th>
+        </tr>
+        {% for info in image_infos %}
+        <tr>
+            <td>{{ info.filename }}</td>
+            <td>{{ info.size[0] }} x {{ info.size[1] }}</td>
+            <td>{{ info.dpi[0] }} x {{ info.dpi[1] }}</td>
+            <td>{{ info.color_depth }}</td>
+            <td>{{ info.compression }}</td>
+            <td>{{ info.quantization_matrix }}</td>
+            <td>{{ info.palette_size }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
